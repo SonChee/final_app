@@ -1,0 +1,15 @@
+<li>
+  <span class="content">
+  	<%= gravatar_for User.find((Comment.find(params[:id]).user_id)) %>
+    <%= link_to User.find((Comment.find(params[:id]).user_id)).name %> 
+  	<%= comment.content %>
+  </span>
+  <span class="timestamp">
+    <i>Commented <%= time_ago_in_words(comment.created_at) %> ago.</i>
+  </span>
+  <% if current_user?(comment.user) %>
+    <%= link_to "delete", comment, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: comment.content %>
+  <% end %>
+</li>

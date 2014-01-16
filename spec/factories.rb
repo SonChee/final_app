@@ -15,4 +15,10 @@ FactoryGirl.define do
   	body "Entry body"
   	user
   end
+
+  factory :comment do
+    content "Comment content"
+    user
+    entry
+  end
 end

@@ -9,4 +9,26 @@
                                      data: { confirm: "You sure?" },
                                      title: entry.title, body: entry.body %>
   <% end %>
+
+  <% if entry.comments.any? %>
+    <h4>Comments (<%= entry.comments.count %>)</h4>
+    <% @cmts = entry.comments.paginate(:page => params[:comment_page], :per_page => 5)%>
+    <li class="entries">
+            <% @cmts.each do |i|%>
+              <li>
+                <span class="content">
+                  <b><%= User.find(i.user_id).name %></b>
+                  <i><%= i.content %></i>
+                </span>
+                <span class="timestamp">
+                  <i>Commented <%= time_ago_in_words(i.created_at) %> ago.</i>
+                </span>
+              </li>
+            <%end %>
+            <%= will_paginate @cmts, :param_name => 'comment_page'%>
+    </li>
+  <% end %>
+  <% if signed_in? %>
+    <%= render 'shared/comment_form',entry: entry%>
+  <%end%>
 </li>

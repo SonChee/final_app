@@ -26,6 +26,7 @@ describe User do
   it { should respond_to(:following?) }
   it { should respond_to(:follow!) }
   it { should respond_to(:unfollow!) }
+  it { should respond_to(:comments) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -172,6 +173,32 @@ describe User do
         followed_user.entries.each do |entry|
           should include(entry)
         end
+      end
+    end
+  end
+
+  describe "comment associations" do
+    
+    before { @user.save 
+          @entry = FactoryGirl.create(:entry)
+    }
+    let!(:older_comment) do
+      FactoryGirl.create(:comment, user: @user, entry: @entry, created_at: 1.day.ago)
+    end
+    let!(:newer_comment) do
+      FactoryGirl.create(:comment, user: @user, entry: @entry, created_at: 1.hour.ago)
+    end
+
+    it "should have the right comments in the right order" do
+      expect(@user.comments.to_a).to eq [newer_comment, older_comment]
+    end
+
+    it "should destroy associated comments" do
+      comments = @user.comments.to_a
+      @user.destroy
+      expect(comments).not_to be_empty
+      comments.each do |comment|
+        expect(Comment.where(id: comment.id)).to be_empty
       end
     end
   end
