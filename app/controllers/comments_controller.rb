@@ -12,11 +12,12 @@ before_action :signed_in_user, only: [:create, :destroy]
   	  redirect_to :back
  	  else
  		  @comments = []
-  	  render 'static_pages/home'
+      redirect_to :back
  	  end
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to :back
   end

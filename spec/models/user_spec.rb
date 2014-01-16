@@ -26,7 +26,10 @@ describe User do
   it { should respond_to(:following?) }
   it { should respond_to(:follow!) }
   it { should respond_to(:unfollow!) }
+<<<<<<< HEAD
   it { should respond_to(:comments) }
+=======
+>>>>>>> 777be37199531d070edbdd3895c3ec9af4d55a4f
 
   it { should be_valid }
   it { should_not be_admin }
@@ -177,6 +180,7 @@ describe User do
     end
   end
 
+<<<<<<< HEAD
   describe "comment associations" do
     
     before { @user.save 
@@ -203,6 +207,8 @@ describe User do
     end
   end
 
+=======
+>>>>>>> 777be37199531d070edbdd3895c3ec9af4d55a4f
   describe "following" do
     let(:other_user) { FactoryGirl.create(:user) }
     before do

@@ -16,7 +16,10 @@
     <% if @user.entries.any? %>
       <h3>Entries (<%= @user.entries.count %>)</h3>
       <ol class="entries">
-        <%= render @entries %>
+         <%= render @entries %>
+
+        
+
       </ol>
       <%= will_paginate @entries %>
     <% end %>

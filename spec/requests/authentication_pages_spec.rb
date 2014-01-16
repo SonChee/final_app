@@ -117,6 +117,7 @@ describe "Authentication" do
           specify { expect(response).to redirect_to(signin_path) }
         end
       end
+<<<<<<< HEAD
 
       describe "in the Comments controller" do
 
@@ -125,6 +126,8 @@ describe "Authentication" do
           specify { expect(response).to redirect_to(signin_path) }
         end
       end
+=======
+>>>>>>> 777be37199531d070edbdd3895c3ec9af4d55a4f
     end
 
     describe "as wrong user" do
