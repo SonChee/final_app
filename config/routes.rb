@@ -5,9 +5,10 @@ FinalApp::Application.routes.draw do
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :entries, only: [:create, :destroy, :show]
+  resources :entries, only: [:create, :destroy, :show, :index]
   resources :relationships, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]
+
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

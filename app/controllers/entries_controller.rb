@@ -3,7 +3,7 @@ class EntriesController < ApplicationController
     before_action :correct_user,   only: [:destroy]
 
   def index
-  
+     @entries = Entry.paginate(page: params[:page], :per_page => 10)
   end
   
   def create
@@ -23,9 +23,17 @@ class EntriesController < ApplicationController
   end
 
   def show
+    # @entry = Entry.find(params[:id])
+    # @comments = @entry.comments.paginate(page: params[:page], :per_page => 5)
+    # @comment = Comment.new
+
     @entry = Entry.find(params[:id])
-    @comments = @entry.comments.paginate(page: params[:page], :per_page => 5)
-    @comment = Comment.new
+    @user = @entry.user
+    @comments = @entry.comments.paginate(page: params[:page], :per_page => 3)
+    
+    if signed_in?
+      @comment = @entry.comments.build(user: current_user)
+    end
   end
 
   private
