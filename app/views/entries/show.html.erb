@@ -16,7 +16,12 @@
                   <i><%= i.content %></i>
                 </span>
                 <span class="timestamp">
-                  <i>Commented <%= time_ago_in_words(i.created_at) %> ago <%= i.created_at.to_date %></i>
+                  <i>
+                    <!-- Commented <%= time_ago_in_words(i.created_at) %> ago <%= i.created_at.to_date %> -->
+                    Commented <%= time_ago_in_words(i.created_at) %> ago at
+                    <%= i.created_at.day %>/<%= i.created_at.month %>/
+                    <%= i.created_at.year %>
+                  </i>
                 </span>
 
                 <% if current_user?(i.user) %>
